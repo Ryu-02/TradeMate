@@ -152,13 +152,13 @@ VITE_API_URL=http://localhost:3000
 
 ### Base URL: `http://localhost:3000`
 
-| Method   | Endpoint      | Description         | Request Body                                   |
-| -------- | ------------- | ------------------- | ---------------------------------------------- |
-| `GET`    | `/trades`     | 모든 매매 기록 조회 | -                                              |
-| `POST`   | `/trades`     | 새 매매 기록 생성   | `{ ticker, type, price, quantity, date }`      |
-| `GET`    | `/trades/:id` | 특정 기록 조회      | -                                              |
-| `PATCH`  | `/trades/:id` | 기록 수정           | `{ ticker?, type?, price?, quantity?, date? }` |
-| `DELETE` | `/trades/:id` | 기록 삭제           | -                                              |
+| Method   | Endpoint      | Description         | Request Body                                                       |
+| -------- | ------------- | ------------------- | ------------------------------------------------------------------ |
+| `GET`    | `/trades`     | 모든 매매 기록 조회 | -                                                                  |
+| `POST`   | `/trades`     | 새 매매 기록 생성   | `{ date, type, symbol, name?, quantity, price, fee?, memo? }`      |
+| `GET`    | `/trades/:id` | 특정 기록 조회      | -                                                                  |
+| `PATCH`  | `/trades/:id` | 기록 수정           | `{ date?, type?, symbol?, name?, quantity?, price?, fee?, memo? }` |
+| `DELETE` | `/trades/:id` | 기록 삭제           | -                                                                  |
 
 ### 📝 Request 예시
 
@@ -167,11 +167,14 @@ VITE_API_URL=http://localhost:3000
 curl -X POST http://localhost:3000/trades \
   -H "Content-Type: application/json" \
   -d '{
-    "ticker": "AAPL",
+    "date": "2025-01-01",
     "type": "BUY",
-    "price": 150.25,
+    "symbol": "AAPL",
+    "name": "애플",
     "quantity": 10,
-    "date": "2024-01-15"
+    "price": 150.25,
+    "fee": 0,
+    "memo": "테스트 매매"
   }'
 ```
 
@@ -201,20 +204,6 @@ trademate/
 │   └── package.json
 │
 └── 📄 README.md
-```
-
----
-
-## 🧪 테스트
-
-```bash
-# Backend 테스트
-cd backend
-npm run test
-
-# Frontend 테스트
-cd frontend
-npm run test
 ```
 
 ---
